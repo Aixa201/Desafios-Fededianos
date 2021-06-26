@@ -1,5 +1,6 @@
 import os
 import time
+import json
 
 #Variables necesarias
 filamentos_en_stock = []
@@ -7,14 +8,7 @@ colores = []
 materiales = []
 titulo = "Inventario de filamentos"
 
-
-filamentos = {
-    "0101VIP" : ["Print A Lot", "PLA", "Violeta", "Pastel",1,200],
-    "0101AZC" : ["Print A Lot", "PLA", "Azul", "Comun", 1, 100],
-    "0101ROC" : ["Print A Lot", "PLA", "Rojo", "Comun",1,25],
-    "0201VEC" : ["Grillon3","PLA", "Verde","Comun",0,0],
-}
-
+filamentos = json.load(open(r'C:\Users\exo3d\Desktop\Programacion\Desafios-Fededianos\Filamentos.json',))
 
 
 for key in filamentos:
@@ -191,10 +185,16 @@ def descripcion_nuevo_filamento(marca_n,material_n,nombre_nuevo_filamento,color,
 def filamento_añadido(nombre_nuevo_filamento):
     print(f"Codigo: {nombre_nuevo_filamento} Descripcion: {filamentos[nombre_nuevo_filamento]}")
     time.sleep(3)
-    print("Actualmente estos son los filamentos registrados:")
-    for i in filamentos:
-        print(f" {i} , {filamentos[i]}")
-        time.sleep(3)
+    print("¿Queres ver los filamentos registrados?")
+    respuesta_pregunta = float(input("1 - Si \n 2 - No \n"))
+    if respuesta_pregunta == 1:
+        print("Actualmente estos son los filamentos registrados:")
+        for i in filamentos:
+            print(f" {i} , {filamentos[i]}")
+            time.sleep(3)
+        print("Gracias por utilizar el Inventario de Filamentos")
+        time.sleep(2)
+        clearConsole()
     print("Gracias por utilizar el Inventario de Filamentos")
     time.sleep(2)
     clearConsole()
