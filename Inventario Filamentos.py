@@ -191,9 +191,13 @@ def filamento_añadido(nombre_nuevo_filamento):
         for i in filamentos:
             print(f" {i} , {filamentos[i]}")
             time.sleep(3)
-        print("Gracias por utilizar el Inventario de Filamentos")
-        time.sleep(2)
-        clearConsole()
+        _extracted_from_filamento_añadido_11()
+    _extracted_from_filamento_añadido_11()
+
+def new_func():
+    _extracted_from_filamento_añadido_11()
+
+def _extracted_from_filamento_añadido_11():
     print("Gracias por utilizar el Inventario de Filamentos")
     time.sleep(2)
     clearConsole()
