@@ -1,8 +1,6 @@
 import os
 import time
 
-#Variables necesarias
-filamentos_en_stock = []
 colores = []
 materiales = []
 titulo = "Inventario de filamentos"
@@ -17,16 +15,17 @@ filamentos = {
 
 
 
-for key in filamentos:
-    if (filamentos[key][4]) >= 1:
-        filamentos_en_stock.append(key)
+#Variables necesarias
+filamentos_en_stock = [
+    key for key, value__ in filamentos.items() if value__[4] >= 1
+]
 
-for plas in filamentos:
+for plas, value_ in filamentos.items():
     if (filamentos[plas][2]) not in colores:
-        colores.append(filamentos[plas][2])
+        colores.append(value_[2])
 
-for mat in filamentos:
-    if (filamentos[mat][1]) not in materiales:
+for mat, value in filamentos.items():
+    if value[1] not in materiales:
         materiales.append(filamentos[mat][1])
 
 
@@ -79,7 +78,7 @@ def tercera_opcion(respuesta):
 
 
 def opcion_4_marca(marca):
-    if marca == 1 or marca == 2:
+    if marca in [1, 2]:
         time.sleep(0.5)
         print("Marca Agregada!")
         time.sleep(0.5)
@@ -90,7 +89,7 @@ def opcion_4_marca(marca):
     return marca
 
 def opcion_4_material(material):
-    if material == 1 or material == 2 or material == 3:
+    if material in [1, 2, 3]:
         time.sleep(0.5)
         print("Tipo de Material Agregado!")
     elif material not in range(1,3):
@@ -207,41 +206,66 @@ def cuarta_opcion(respuesta):
     global cantidad
     global peso
     if respuesta == 4:
-        print("¿De que marca es el nuevo filamento?")
-        print("1 - Print A Lot")
-        print("2 - Grillon3")
-        marca = int(input())
-        opcion_4_marca(marca)
-        print("¿De que material es el nuevo filamento?")
-        print("1 - PLA")
-        print("2 - PETG")
-        print("3 - FLEX")
-        material = int(input())
-        opcion_4_material(material)
-        print("¿De que color es el nuevo filamento?")
-        print("Ingresar en Mayusculas")
-        color = input()
-        time.sleep(0.5)
-        opcion_4_color(color)
-        print("¿Que tipo de color es?")
-        print("1 - Comun")
-        print("2 - Pastel")
-        print("3 - Metalizado")
-        print("4 - Especial")
-        print("5 - Translucido")
-        print("6 - UV")
-        tipo_color = int(input())
-        opcion_4_tipo_color(tipo_color)
-        print("¿Cuantas bobinas hay del filamento?")
-        cantidad = int(input())
-        time.sleep(0.5)
-        print("¿Cual es el peso del filamento sin contar el peso de la bobina?")
-        peso = int(input())
-        time.sleep(0.5)
-        generador_codigo_dicc(marca, material, color, tipo_color_n)
-        msj_codigo_creado(nombre_nuevo_filamento)
-        descripcion_nuevo_filamento(marca_n,material_n,nombre_nuevo_filamento,color,tipo_color_n,cantidad,peso)
-        filamento_añadido(nombre_nuevo_filamento)
+        _extracted_from_cuarta_opcion_9_()
+
+def _extracted_from_cuarta_opcion_9_():
+    _extracted_from_cuarta_opcion_9(
+        "¿De que marca es el nuevo filamento?",
+        "1 - Print A Lot",
+        "2 - Grillon3",
+    )
+
+    marca = int(input())
+    opcion_4_marca(marca)
+    _extracted_from_cuarta_opcion_9(
+        "¿De que material es el nuevo filamento?", "1 - PLA", "2 - PETG"
+    )
+
+    print("3 - FLEX")
+    material = int(input())
+    opcion_4_material(material)
+    print("¿De que color es el nuevo filamento?")
+    print("Ingresar en Mayusculas")
+    color = input()
+    time.sleep(0.5)
+    opcion_4_color(color)
+    _extracted_from_cuarta_opcion_9(
+        "¿Que tipo de color es?", "1 - Comun", "2 - Pastel"
+    )
+
+    _extracted_from_cuarta_opcion_28(
+        "3 - Metalizado", "4 - Especial", "5 - Translucido"
+    )
+
+    print("6 - UV")
+    tipo_color = int(input())
+    opcion_4_tipo_color(tipo_color)
+    cantidad = _extracted_from_cuarta_opcion_34(
+        "¿Cuantas bobinas hay del filamento?"
+    )
+
+    peso = _extracted_from_cuarta_opcion_34(
+        "¿Cual es el peso del filamento sin contar el peso de la bobina?"
+    )
+
+    generador_codigo_dicc(marca, material, color, tipo_color_n)
+    msj_codigo_creado(nombre_nuevo_filamento)
+    descripcion_nuevo_filamento(marca_n,material_n,nombre_nuevo_filamento,color,tipo_color_n,cantidad,peso)
+    filamento_añadido(nombre_nuevo_filamento)
+
+def _extracted_from_cuarta_opcion_34(arg0):
+    print(arg0)
+    result = int(input())
+    time.sleep(0.5)
+    return result
+
+def _extracted_from_cuarta_opcion_28(arg0, arg1, arg2):
+    print(arg0)
+    print(arg1)
+    print(arg2)
+
+def _extracted_from_cuarta_opcion_9(arg0, arg1, arg2):
+    _extracted_from_cuarta_opcion_28(arg0, arg1, arg2)
 
 def opcion_5_mod_marca(respuesta_opc_5):
     global mod_marca
@@ -259,22 +283,23 @@ def opcion_5_mod_marca(respuesta_opc_5):
             marca_act = "Print A Lot"
             if filamentos[filamento_a_mod][0] == marca_act:
                 print("El filamento es de la marca seleccionada")
-            elif filamentos[filamento_a_mod][0] != marca_act:
-                filamentos[filamento_a_mod][0] = marca_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod]) 
+            else:
+                _extracted_from_opcion_5_mod_marca_18(marca_act)
         elif mod_marca == 2:
             marca_act = "Grillon3"
             if filamentos[filamento_a_mod][0] == marca_act:
                 print("El filamento es de la marca seleccionada")
-            elif filamentos[filamento_a_mod][0] != marca_act:
-                filamentos[filamento_a_mod][0] = marca_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod]) 
-        else: 
+            else:
+                _extracted_from_opcion_5_mod_marca_18(marca_act)
+        else:
             print("Volver a ingresar")
             time.sleep(2)
             clearConsole
+
+def _extracted_from_opcion_5_mod_marca_18(marca_act):
+    filamentos[filamento_a_mod][0] = marca_act
+    print ("Descripcion actualizada:")
+    print(filamentos[filamento_a_mod])
 
 
 
@@ -284,43 +309,45 @@ def opcion_5_mod_material(respuesta_opc_5):
     global material_act
     global nombre_mod_filamento
     if respuesta_opc_5 == 2:
-        print("Usted desea cambiar el siguiente valor:")
-        print((filamentos[filamento_a_mod][1]))
-        time.sleep(1)
-        print("¿A que valor desea modificarlo?")
-        print("1 - PLA")
-        print("2 - PETG")
-        print("3 - FLEX")
-        mod_material = int(input)
+        _extracted_from_opcion_5_mod_material_6()
+
+def _extracted_from_opcion_5_mod_material_6():
+    print("Usted desea cambiar el siguiente valor:")
+    print((filamentos[filamento_a_mod][1]))
+    time.sleep(1)
+    print("¿A que valor desea modificarlo?")
+    print("1 - PLA")
+    print("2 - PETG")
+    print("3 - FLEX")
+    mod_material = int(input)
+    time.sleep(2)
+    if mod_material == 1:
+        material_act = "PLA"
+        if filamentos[filamento_a_mod][1] == material_act:
+            print("El filamento es del material seleccionado")
+        else:
+            _extracted_from_opcion_5_mod_material_20(material_act)
+    elif mod_material == 2:
+        material_act = "PETG"
+        if filamentos[filamento_a_mod][1] == material_act:
+            print("El filamento es del material seleccionado")
+        else:
+            _extracted_from_opcion_5_mod_material_20(material_act)
+    elif mod_material == 3:
+        material_act = "FLEX"
+        if filamentos[filamento_a_mod][1] == material_act:
+            print("El filamento es del material seleccionado")
+        else:
+            _extracted_from_opcion_5_mod_material_20(material_act)
+    else:
+        print("Volver a ingresar")
         time.sleep(2)
-        if mod_material == 1:
-            material_act = "PLA"
-            if filamentos[filamento_a_mod][1] == material_act:
-                print("El filamento es del material seleccionado")
-            elif filamentos[filamento_a_mod][1] != material_act:
-                filamentos[filamento_a_mod][1] = material_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-        elif mod_material == 2:
-            material_act = "PETG"
-            if filamentos[filamento_a_mod][1] == material_act:
-                print("El filamento es del material seleccionado")
-            elif filamentos[filamento_a_mod][1] != material_act:
-                filamentos[filamento_a_mod][1] = material_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-        elif mod_material == 3:
-            material_act = "FLEX"
-            if filamentos[filamento_a_mod][1] == material_act:
-                print("El filamento es del material seleccionado")
-            elif filamentos[filamento_a_mod][1] != material_act:
-                filamentos[filamento_a_mod][1] = material_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-        else: 
-            print("Volver a ingresar")
-            time.sleep(2)
-            clearConsole
+        clearConsole
+
+def _extracted_from_opcion_5_mod_material_20(material_act):
+    filamentos[filamento_a_mod][1] = material_act
+    print ("Descripcion actualizada:")
+    print(filamentos[filamento_a_mod])
 
 def opcion_5_mod_color(respuesta_opc_5):
     global mod_color
@@ -344,7 +371,7 @@ def opcion_5_mod_color(respuesta_opc_5):
                 filamentos[filamento_a_mod][2] = mod_color
                 print ("Descripcion actualizada:")
                 print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][2] == mod_color:
+            else:
                 print("El filamento es del color mencionado")
         elif si_no == 2:
             print("Cancelando modificacion...")
@@ -352,7 +379,7 @@ def opcion_5_mod_color(respuesta_opc_5):
             clearConsole()
 
 
-def opcion_5_mod_tipo_color(respuesta_opc_5):
+def opcion_5_mod_tipo_color(respuesta_opc_5):  # sourcery no-metrics
     global mod_tipo_color
     global tipo_color_act
     if respuesta_opc_5 == 4:
@@ -371,51 +398,44 @@ def opcion_5_mod_tipo_color(respuesta_opc_5):
         if mod_tipo_color == 1:
             tipo_color_act = "Comun"
             if filamentos[filamento_a_mod][3] != tipo_color_act:
-                filamentos[filamento_a_mod][3] = tipo_color_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][3] == tipo_color_act:
+                _extracted_from_opcion_5_mod_tipo_color_20(tipo_color_act)
+            else:
                 print("El filamento es del tipo de color seleccionado")
         elif mod_tipo_color == 2:
             tipo_color_act = "Pastel"
             if filamentos[filamento_a_mod][3] != tipo_color_act:
-                filamentos[filamento_a_mod][3] = tipo_color_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][3] == tipo_color_act:
+                _extracted_from_opcion_5_mod_tipo_color_20(tipo_color_act)
+            else:
                 print("El filamento es del tipo de color seleccionado")
         elif mod_tipo_color == 3:
             tipo_color_act = "Metalizado"
             if filamentos[filamento_a_mod][3] != tipo_color_act:
-                filamentos[filamento_a_mod][3] = tipo_color_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][3] == tipo_color_act:
+                _extracted_from_opcion_5_mod_tipo_color_20(tipo_color_act)
+            else:
                 print("El filamento es del tipo de color seleccionado")
         elif mod_tipo_color == 4:
             tipo_color_act = "Especial"
             if filamentos[filamento_a_mod][3] != tipo_color_act:
-                filamentos[filamento_a_mod][3] = tipo_color_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][3] == tipo_color_act:
+                _extracted_from_opcion_5_mod_tipo_color_20(tipo_color_act)
+            else:
                 print("El filamento es del tipo de color seleccionado")
         elif mod_tipo_color == 5:
             tipo_color_act = "Translucido"
             if filamentos[filamento_a_mod][3] != tipo_color_act:
-                filamentos[filamento_a_mod][3] = tipo_color_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][3] == tipo_color_act:
+                _extracted_from_opcion_5_mod_tipo_color_20(tipo_color_act)
+            else:
                 print("El filamento es del tipo de color seleccionado")
         elif mod_tipo_color == 6:
             tipo_color_act = "UV"
             if filamentos[filamento_a_mod][3] != tipo_color_act:
-                filamentos[filamento_a_mod][3] = tipo_color_act
-                print ("Descripcion actualizada:")
-                print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][3] == tipo_color_act:
+                _extracted_from_opcion_5_mod_tipo_color_20(tipo_color_act)
+            else:
                 print("El filamento es del tipo de color seleccionado")
+
+def _extracted_from_opcion_5_mod_tipo_color_20(tipo_color_act):
+    filamentos[filamento_a_mod][3] = tipo_color_act
+    print ("Descripcion actualizada:")
+    print(filamentos[filamento_a_mod])
 
 
 
@@ -439,7 +459,7 @@ def opcion_5_mod_cantidad(respuesta_opc_5):
                 filamentos[filamento_a_mod][4] = mod_cantidad
                 print ("Descripcion actualizada:")
                 print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][4] == mod_cantidad:
+            else:
                 print("El filamento ya contiene la informacion")
         elif si_no == 2:
             print("Cancelando modificacion...")
@@ -468,7 +488,7 @@ def opcion_5_mod_peso(respuesta_opc_5):
                 filamentos[filamento_a_mod][5] = mod_peso
                 print ("Descripcion actualizada:")
                 print(filamentos[filamento_a_mod])
-            elif filamentos[filamento_a_mod][5] == mod_peso:
+            else:
                 print("El filamento ya contiene la informacion")
         elif si_no == 2:
             print("Cancelando modificacion...")
@@ -481,34 +501,50 @@ def quinta_opcion(respuesta):
     global respuesta_opc_5
     global filamento_a_mod
     if respuesta == 5:
-        print("¿Que filamento desea modificar?")
-        print("Escriba la opcion tal y como aparece")
-        print("Ejemplo: 0101VIP")
+        _extracted_from_quinta_opcion_17(
+            "¿Que filamento desea modificar?",
+            "Escriba la opcion tal y como aparece",
+            "Ejemplo: 0101VIP",
+        )
+
         for filamento in filamentos:
             print(f"{filamento}")
             time.sleep(1)
         filamento_a_mod = input()
         time.sleep(2)
         if filamento_a_mod in filamentos:
-            print("Los detalles del filamento seleccionado son:")
-            print (filamentos[filamento_a_mod])
-            print("¿Que desea modificar?")
-            print("1 - Marca")
-            print("2 - Material")
-            print("3 - Color")
-            print("4 - Tipo de Color")
-            print("5 - Cantidad de Bobinas")
-            print("6 - Peso total")
-            respuesta_opc_5 = int(input())
-            opcion_5_mod_marca(respuesta_opc_5)
-            opcion_5_mod_material(respuesta_opc_5)
-            opcion_5_mod_color(respuesta_opc_5)
-            opcion_5_mod_tipo_color(respuesta_opc_5)
-            opcion_5_mod_cantidad(respuesta_opc_5)
-            opcion_5_mod_peso(respuesta_opc_5)
+            _extracted_from_quinta_opcion_15(filamento_a_mod)
         else: 
             print("Volver a ingresar")
             clearConsole()
+
+def _extracted_from_quinta_opcion_15(filamento_a_mod):
+    print("Los detalles del filamento seleccionado son:")
+    print (filamentos[filamento_a_mod])
+    _extracted_from_quinta_opcion_17(
+        "¿Que desea modificar?", "1 - Marca", "2 - Material"
+    )
+
+    _extracted_from_quinta_opcion_20(
+        "3 - Color", "4 - Tipo de Color", "5 - Cantidad de Bobinas"
+    )
+
+    print("6 - Peso total")
+    respuesta_opc_5 = int(input())
+    opcion_5_mod_marca(respuesta_opc_5)
+    opcion_5_mod_material(respuesta_opc_5)
+    opcion_5_mod_color(respuesta_opc_5)
+    opcion_5_mod_tipo_color(respuesta_opc_5)
+    opcion_5_mod_cantidad(respuesta_opc_5)
+    opcion_5_mod_peso(respuesta_opc_5)
+
+def _extracted_from_quinta_opcion_20(arg0, arg1, arg2):
+    print(arg0)
+    print(arg1)
+    print(arg2)
+
+def _extracted_from_quinta_opcion_17(arg0, arg1, arg2):
+    _extracted_from_quinta_opcion_20(arg0, arg1, arg2)
 
 
 
