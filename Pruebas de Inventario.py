@@ -25,11 +25,11 @@ filamentos_en_stock = [
 
 
 for plas, value_ in filamentos.items():
-    if (filamentos[plas][2]) not in colores:
+    if (filamentos[plas][2]) not in colores and (filamentos[plas][4]) > 0:
         colores.append(value_[2])
 
 for mat, value in filamentos.items():
-    if value[1] not in materiales:
+    if value[1] not in materiales and (filamentos[plas][4]) > 0:
         materiales.append(filamentos[mat][1])
 
 
@@ -55,8 +55,7 @@ confirmacion_eleccion.grid(column=0,row=2)
 def click():
     confirmacion_eleccion.config(text="Seleccionado!")
 
-def go_back():
-    ventana_filamentos_en_Stock.destroy()
+
 
 def primer_opcion():
     global ventana_filamentos_en_Stock
@@ -66,12 +65,40 @@ def primer_opcion():
     contenido = scrolledtext.ScrolledText(ventana_filamentos_en_Stock, width=25,height=5,font = ("Century Gothic", 15))
     contenido.grid(column=0,row=0)
     contenido.insert(INSERT, "\n".join(filamentos_en_stock))
-    volver = Button(ventana_filamentos_en_Stock,text="Volver",command=go_back)
+    volver = Button(ventana_filamentos_en_Stock,text="Volver",command=ventana_filamentos_en_Stock.destroy)
     volver.grid(column=0,row=9)
+
+def segunda_opcion():
+    global ventana_colores
+    ventana_colores = tkinter.Toplevel()
+    ventana_colores.geometry("300x150")
+    ventana_colores.wm_title("Colores en Stock")
+    contenido = scrolledtext.ScrolledText(ventana_colores, width=25,height=5,font = ("Century Gothic", 15))
+    contenido.grid(column=0,row=0)
+    contenido.insert(INSERT, "\n".join(colores))
+    volver = Button(ventana_colores,text="Volver",command=ventana_colores.destroy)
+    volver.grid(column=0,row=9)
+
+
+def help_window():
+    guia = open("Ayuda-Inv-Filamentos.txt", "r")
+    ayuda = tkinter.Toplevel()
+    ayuda.wm_title("Ayuda")
+    contenido = Text(ayuda)
+    contenido.configure(state=DISABLED)
+    contenido.insert(INSERT, guia.read)
+    contenido.pack()
+
+menu = Menu(inicio)
+new_item = Menu(menu, tearoff=0)
+new_item.add_command(label='Ayuda', command=help_window)
+menu.add_cascade(label='Opciones',menu=new_item)
+inicio.config(menu=menu)
+
 
 opcion1 = Button(inicio,text="Filamentos en Stock(Por codigo)",command=primer_opcion)
 opcion1.grid(column=0,row=3)
-opcion2 = Button(inicio,text="Colores en Stock",command=click)
+opcion2 = Button(inicio,text="Colores en Stock",command=segunda_opcion)
 opcion2.grid(column=0,row=4)
 opcion3 = Button(inicio,text="Materiales en Stock",command=click)
 opcion3.grid(column=0,row=5)
