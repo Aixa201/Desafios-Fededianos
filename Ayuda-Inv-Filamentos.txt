@@ -1,0 +1,57 @@
+Bienvenido a la guia del Inventario de filamentos
+A continuacion se explicara cada una de las funciones del mismo:
+
+1-Filamentos en Stock (Por Codigo)
+    Devuelve el codigo de los filamentos que tengan como minimo una bobina en stock,
+    pero sin detallar especificamente las caracteristicas de cada uno ya que esa es 
+    la funcion del codigo, para poder comprenderlo, el codigo aporta los siguientes 
+    datos del filamento:
+    
+    Marca - Material - Color - Tipo de Color
+    
+    Cada marca y material esta definida por numeros, mientras que el color y el tipo
+    de color esta definido por su inicial (en el caso del color, las primeras dos)
+    
+    Numeros de Marca y Material:
+    Marca:                     Material:
+    01: PrintALot               01: PLA
+    02: Grillon3                02: PETG
+    03: MakerParts              03: ABS
+    04: PlastAr                 04: FLEX
+    05: GST                     
+
+    Ejemplos de color y tipo de color:
+    Color:                       Tipo de color:
+    RO: Rojo                     C: Comun
+    NE: Negro                    T: Translucido
+    VI: Violeta                  E: Especial
+    PI: Pink(Rosa)               U: UV
+    VE: Verde                    G: Glitter
+                                 B: Bicolor
+                                 P: Pastel
+                                 M: Metalizado
+    
+    Ejemplo de un codigo:
+
+    0101VIP: PrintALot, PLA, Violeta, Pastel
+
+2-Colores en Stock:
+    Devuelve los colores de filamentos que se encuentren en Stock, es decir, que minimo
+    esten registrados con una bobina.
+
+3-Materiales en Stock:
+    Devuelve el tipo de material de filamentos que se encuentren en Stock, es decir, que minimo
+    esten registrados con una bobina.
+
+4-Agregar un filamento:
+    Permite añadir un filamento al inventario luego de haber comprobado que no este actualmente
+    en el mismo, en el caso de que lo este, permitira ver los datos del mismo.
+    El sistema requerira los siguientes datos:
+
+    Marca
+    Material
+    Color
+    Tipo de Color
+    Cantidad de Bobinas en Stock
+    Peso total restando el peso de las bobinas (estimado 130g)
+

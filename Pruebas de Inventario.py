@@ -81,7 +81,7 @@ def segunda_opcion():
 
 
 def help_window():
-    guia = open("Ayuda-Inv-Filamentos.txt", "r")
+    guia = open("Ayuda-Inv-Filamentos.txt", "wb")
     ayuda = tkinter.Toplevel()
     ayuda.wm_title("Ayuda")
     contenido = Text(ayuda)
