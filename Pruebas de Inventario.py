@@ -11,10 +11,10 @@ titulo = "Inventario de filamentos"
 
 
 filamentos = {
-    "0101VIP" : ["Print A Lot", "PLA", "Violeta", "Pastel",1,200],
-    "0101AZC" : ["Print A Lot", "PLA", "Azul", "Comun", 1, 100],
-    "0101ROC" : ["Print A Lot", "PLA", "Rojo", "Comun",1,25],
-    "0201VEC" : ["Grillon3","PLA", "Verde","Comun",0,0],
+    "0101VIP" :["Print A Lot", "PLA", "Violeta", "Pastel",1,200],
+    "0101AZC" :["Print A Lot", "PLA", "Azul", "Comun", 1, 100],
+    "0101ROC" :["Print A Lot", "PLA", "Rojo", "Comun",1,25],
+    "0201VEC" :["Grillon3","PLA", "Verde","Comun",0,0],
 }
 
 
@@ -31,7 +31,7 @@ for plas, value_ in filamentos.items():
         colores.append(value_[2])
 
 for mat, value in filamentos.items():
-    if value[1] not in materiales and (filamentos[plas][4]) > 0:
+    if value[1] not in materiales and (filamentos[mat][4]) > 0:
         materiales.append(filamentos[mat][1])
 
 
@@ -48,16 +48,16 @@ class Window(Frame):
 def help_window():
     ayuda = tkinter.Toplevel()
     ayuda.wm_title("Ayuda")
-    contenido = scrolledtext.ScrolledText(ayuda, width= 90,height=25)
+    contenido = scrolledtext.ScrolledText(ayuda, width=90, height=25)
     with open("Ayuda-Inv-Filamentos.txt") as fh:
         guia = fh.read()
-    contenido.insert(END,guia)
+    contenido.insert(END, guia)
     contenido.configure(state=DISABLED)
-    contenido.grid(column=0,row=0)
+    contenido.grid(column=0, row=0)
     contenido.pack()
-    menu = Menu(ayuda)
-    menu.add_command(label='Volver', command=ayuda.destroy)
-    ayuda.config(menu=menu)
+    menu_help = Menu(ayuda)
+    menu_help.add_command(label='Volver', command=ayuda.destroy)
+    ayuda.config(menu=menu_help)
 
 
 #Definicion del menu
