@@ -40,12 +40,13 @@ A continuacion se explicara cada una de las funciones del mismo:
     esten registrados con una bobina.
 
 3-Materiales en Stock:
-    Devuelve el tipo de material de filamentos que se encuentren en Stock, es decir, que minimo
-    esten registrados con una bobina.
+    Devuelve el tipo de material de filamentos que se encuentren en Stock, es decir, que 
+    minimo esten registrados con una bobina.
 
 4-Agregar un filamento:
-    Permite añadir un filamento al inventario luego de haber comprobado que no este actualmente
-    en el mismo, en el caso de que lo este, permitira ver los datos del mismo.
+    Permite añadir un filamento al inventario luego de haber comprobado que no este 
+    actualmente en el mismo, en el caso de que lo este, permitira ver los datos del 
+    mismo.
     El sistema requerira los siguientes datos:
 
     Marca

@@ -1,7 +1,9 @@
 import tkinter
 from tkinter import *
 from tkinter import scrolledtext
-import re
+import tkinter as tk
+
+#Variables necesarias
 
 colores = []
 materiales = []
@@ -33,6 +35,7 @@ for mat, value in filamentos.items():
         materiales.append(filamentos[mat][1])
 
 
+#Definicion de Window para tkinter
 
 class Window(Frame):
 
@@ -40,26 +43,50 @@ class Window(Frame):
         Frame.__init__(self, master)        
         self.master = master
 
+#Funcion para hacer que todas las opciones tengan a mano la guia
+
+def help_window():
+    ayuda = tkinter.Toplevel()
+    ayuda.wm_title("Ayuda")
+    contenido = scrolledtext.ScrolledText(ayuda, width= 90,height=25)
+    with open("Ayuda-Inv-Filamentos.txt") as fh:
+        guia = fh.read()
+    contenido.insert(END,guia)
+    contenido.configure(state=DISABLED)
+    contenido.grid(column=0,row=0)
+    contenido.pack()
+    menu = Menu(ayuda)
+    menu.add_command(label='Volver', command=ayuda.destroy)
+    ayuda.config(menu=menu)
+
+
+#Definicion del menu
 
 inicio = Tk()
 inicio.wm_title("Inventario de filamentos")
 inicio.geometry('310x250')
-
 bienvenida = Label(inicio, text="Bienvenido al inventario de filamentos",font = ("Agency FB", 20))
 bienvenida.grid(column=0,row=1)
+menu = Menu(inicio)
+new_item = Menu(menu, tearoff=0)
+menu.add_command(label='Ayuda', command=help_window)
+inicio.config(menu=menu)
 
 
-confirmacion_eleccion = Label(inicio,text="Elegir una de las siguientes opciones:")
-confirmacion_eleccion.grid(column=0,row=2)
-
+#comando default para las que no estan definidas
 def click():
+    confirmacion_eleccion = Label(inicio,text="Elegir una de las siguientes opciones:")
+    confirmacion_eleccion.grid(column=0,row=2)
     confirmacion_eleccion.config(text="Seleccionado!")
 
 
-
+#Ventana que se abre con la primera opcion
 def primer_opcion():
-    global ventana_filamentos_en_Stock
+    global ventana_filamentos_en_Stock 
     ventana_filamentos_en_Stock = tkinter.Toplevel()
+    menu = Menu(ventana_filamentos_en_Stock)
+    menu.add_command(label='Ayuda', command=help_window)
+    ventana_filamentos_en_Stock.config(menu=menu)
     ventana_filamentos_en_Stock.geometry("300x150")
     ventana_filamentos_en_Stock.wm_title("Filamentos en Stock")
     contenido = scrolledtext.ScrolledText(ventana_filamentos_en_Stock, width=25,height=5,font = ("Century Gothic", 15))
@@ -68,9 +95,13 @@ def primer_opcion():
     volver = Button(ventana_filamentos_en_Stock,text="Volver",command=ventana_filamentos_en_Stock.destroy)
     volver.grid(column=0,row=9)
 
+#Ventana que se abre con la segunda opcion
 def segunda_opcion():
     global ventana_colores
     ventana_colores = tkinter.Toplevel()
+    menu = Menu(ventana_colores)
+    menu.add_command(label='Ayuda', command=help_window)
+    ventana_colores.config(menu=menu)
     ventana_colores.geometry("300x150")
     ventana_colores.wm_title("Colores en Stock")
     contenido = scrolledtext.ScrolledText(ventana_colores, width=25,height=5,font = ("Century Gothic", 15))
@@ -78,22 +109,6 @@ def segunda_opcion():
     contenido.insert(INSERT, "\n".join(colores))
     volver = Button(ventana_colores,text="Volver",command=ventana_colores.destroy)
     volver.grid(column=0,row=9)
-
-
-def help_window():
-    guia = open("Ayuda-Inv-Filamentos.txt", "wb")
-    ayuda = tkinter.Toplevel()
-    ayuda.wm_title("Ayuda")
-    contenido = Text(ayuda)
-    contenido.configure(state=DISABLED)
-    contenido.insert(INSERT, guia.read)
-    contenido.pack()
-
-menu = Menu(inicio)
-new_item = Menu(menu, tearoff=0)
-new_item.add_command(label='Ayuda', command=help_window)
-menu.add_cascade(label='Opciones',menu=new_item)
-inicio.config(menu=menu)
 
 
 opcion1 = Button(inicio,text="Filamentos en Stock(Por codigo)",command=primer_opcion)
