@@ -1,14 +1,15 @@
 import os
 import time
-import json
 
 colores = []
 materiales = []
 titulo = "Inventario de filamentos"
-
-filamentos = json.load(open(r'C:\Users\exo3d\Desktop\Programacion\Desafios-Fededianos\Filamentos.json',))
-
-
+filamentos = {
+"0101VIP" : ["Print A Lot", "PLA", "Violeta", "Pastel",1,200],
+"0101AZC" : ["Print A Lot", "PLA", "Azul", "Comun", 1, 100],
+"0101ROC" : ["Print A Lot", "PLA", "Rojo", "Comun",1,25],
+"0201VEC" : ["Grillon3","PLA", "Verde","Comun",0,0]
+}
 #Variables necesarias
 filamentos_en_stock = [
     key for key, value__ in filamentos.items() if value__[4] >= 1
